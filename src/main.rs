@@ -39,14 +39,16 @@ fn main() -> std::io::Result<()> {
     let mut state = State::new();
     for line in iter_arr {
         parser::parse_line(line, &mut state);
-        println!("{:?}", state);
         state.index += 1;
     }
 
-    for i in 0..state.sig_map.len() {
-        let range = state.sig_map.get(i).unwrap().clone();
-        for j in range {
-            println!("{}", contents_vec.get(j).unwrap());
+    for vec_key in state.doc_map.keys() {
+        let vec = state.doc_map.get(vec_key).unwrap();
+        for vector in vec {
+            for doc in vector {
+                print!("{}", doc);
+            }
+            println!("");
         }
     }
 
